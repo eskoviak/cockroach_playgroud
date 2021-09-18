@@ -1,0 +1,4 @@
+greenlet==1.1.1
+psycopg2==2.9.1
+SQLAlchemy==1.4.23
+sqlalchemy-cockroachdb==1.4.0
