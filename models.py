@@ -58,4 +58,4 @@ if __name__ == '__main__':
         print('Failed to connect to database.')
         print('{0}'.format(e))
 
-Base.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
