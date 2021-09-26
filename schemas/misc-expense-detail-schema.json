@@ -5,18 +5,18 @@
     "description": "Detail object added to a vehicle expense entry",
     "type": "object",
     "properties": {
-        "gallons" : {
-            "description" : "for a fuel expense, the gallons pumped",
-            "type" : "number"
-        },
-        "mileage" : {
-            "description" : "the mileage",
-            "type" : "integer"
-        },
         "location" : {
             "description" : "The location of the expense",
             "type" : "string"
+        },
+        "vendor": {
+            "description" : "The provider of the service",
+            "type" : "string"
+        },
+        "balance-on_acct" : {
+            "description" : "The balance on account",
+            "type" : "number"
         }
     },
-    "required": ["mileage"]
+    "required": ["location"]
 }

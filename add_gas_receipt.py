@@ -7,17 +7,22 @@ from sqlalchemy_cockroachdb import run_transaction
 
 from models import Expense, Expense_category, Expense_sub_category
 
+def add_expense(session):
+    ## TODO
+    print(f"to do")
+
 def add_fuel_receipt(session):
-    detail = {'gallons': 11.008, 'miles': 161834, 'location' : 'Red Wing, MN'}
-    
+    #detail = {'location' : 'Lakeville, MN', 'vendor': 'HyVee'}
+    detail = {'mileage': 162030, 'location': 'Hastings, MN'}
+
     new_expense = []
     
     expense_category = session.query(Expense_category).filter(Expense_category.expense_category =='Vehicle').first()
-    expense_sub_category = session.query(Expense_sub_category).filter(Expense_sub_category.expense_sub_category == 'Fuel').first()
+    expense_sub_category = session.query(Expense_sub_category).filter(Expense_sub_category.expense_sub_category == 'Maintenance').first()
 
     #print (expense_category.id,expense_sub_category.id)
-    new_expense.append(Expense(date='2021-09-18T23:25:00', expense_category_id=expense_category.id,
-        expense_sub_category_id=expense_sub_category.id, amount=35.21, tender = 'mastercard swiped *4863', 
+    new_expense.append(Expense(date='2021-09-24T19:17:00Z', expense_category_id=expense_category.id,
+        expense_sub_category_id=expense_sub_category.id, amount=27.32, tender = 'amex inserted *8200', 
         expense_detail = json.dumps(detail)))
     session.add_all(new_expense)   
 
