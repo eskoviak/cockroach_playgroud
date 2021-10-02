@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from sqlalchemy import create_engine
@@ -21,7 +22,7 @@ def add_expense(session, detail):
         expense_sub_category_id = expense_sub_category.id,
         amount = detail['amount'],
         tender = detail['tender'],
-        expense_detail = json.dumps(detail['exp_detail'])
+        expense_detail = json.dumps(detail['expense_detail'])
     ))
 
     session.add_all(new_expense)
@@ -42,15 +43,30 @@ def add_fuel_receipt(session):
     session.add_all(new_expense)   
 
 
+from dataclasses import dataclass, asdict
+@dataclass
+class Detail:
+        expense_category : str
+        expense_sub_category : str
+        expense_detail : dict
+        date : str
+        amount: float
+        tender : str
+
+
+
 if __name__ == '__main__':
-    detail = {
-        'expense_category' : 'Misc',
-        'expense_sub_category' : 'Grocery',
-        'exp_detail' : {'location' : 'Red Wing, MN', 'vendor': 'Simple Abundance', 'Balance on Account' : 76.05},
-        'date' : '2021-09-27T20:57:26Z',
-        'amount' : 4.40,
-        'tender' : 'prepaid'
-    }
+    item = Detail(
+        expense_category = 'Vehicle',
+        expense_sub_category = 'Fuel',
+        #expense_detail = {'location' : 'Red Wing, MN', 'vendor': 'Simple Abundance', 'Balance on Account' : 56.77},
+        #expense_detail = {'location' : 'Red Wing, MN', 'vendor' : 'Target'},
+        expense_detail = {'location' : 'Red Wing, MN', 'gallons' : 12.631, 'mileage' : 162244},
+        date = '2021-09-30T23:04:26Z',
+        amount = 46.60,
+        tender = 'amex inserted *8200'
+    )
+
     try:
         psycopg_uri = url = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
         engine = create_engine(psycopg_uri)
@@ -59,4 +75,4 @@ if __name__ == '__main__':
         print('{0}'.format(e))
 
     run_transaction(sessionmaker(bind=engine),
-        lambda s : add_expense(s, detail))
+        lambda s : add_expense(s, asdict(item)))
