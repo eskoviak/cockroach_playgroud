@@ -80,13 +80,14 @@ class Detail:
 if __name__ == '__main__':
     item = Detail(
         expense_category = 'Misc',
-        expense_sub_category = 'Houseware',
-        #expense_detail = {'location' : 'Red Wing, MN', 'vendor': 'Simple Abundance', 'Balance on Account' : 56.77},
-        expense_detail = {'location' : 'Red Wing, MN', 'vendor' : 'Walmat'},
+        expense_sub_category = 'Grocery',
+        expense_detail = {'location' : 'Red Wing, MN', 'vendor': 'Simple Abundance', 'Balance on Account' : 41.08},
+        #expense_detail = {'location' : 'Red Wing, MN', 'vendor' : 'Target'},
         #expense_detail = {'location' : 'Red Wing, MN', 'gallons' : 12.631, 'mileage' : 162244},
-        date = '2021-10-03T20:33:36Z',
-        amount = 5.28,
-        tender = 'cash'
+        #expense_detail = { 'location' : 'Online', 'vendor' : 'Zoom'},
+        date = '2021-10-05T19:01:18Z',
+        amount = 15.60,
+        tender = 'prepaid'
     )
 
     try:
