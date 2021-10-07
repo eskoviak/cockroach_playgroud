@@ -18,7 +18,11 @@ def get_expense_categories(session):
 
 def get_expense_sub_categories(session, category):
     expense_sub_categories = {}
-    items = session.query()
+    items = session.query(Expense_sub_category, Expense_sub_category.expense_sub_category, Expense_sub_category.id).\
+                    join(
+
+        )
+        
 
 get_allowed_sub_category_sql = """
 SELECT expense_sub_category, id 
@@ -49,21 +53,7 @@ def add_expense(session, detail):
     session.add_all(new_expense)
 
 
-'''def add_fuel_receipt(session):
-    detail = {'location' : 'Red Wing, MN', 'vendor': 'Family Fare'}
-    #detail = {'mileage': 162030, 'location': 'Hastings, MN'}
 
-    new_expense = []
-    
-    expense_category = session.query(Expense_category).filter(Expense_category.expense_category =='Misc').first()
-    expense_sub_category = session.query(Expense_sub_category).filter(Expense_sub_category.expense_sub_category == 'Grocery').first()
-
-    #print (expense_category.id,expense_sub_category.id)
-    new_expense.append(Expense(date='2021-09-26T19:41:00Z', expense_category_id=expense_category.id,
-        expense_sub_category_id=expense_sub_category.id, amount=10.67, tender = 'amex inserted *8200', 
-        expense_detail = json.dumps(detail)))
-    session.add_all(new_expense)   
-'''
 
 from dataclasses import dataclass, asdict
 @dataclass
