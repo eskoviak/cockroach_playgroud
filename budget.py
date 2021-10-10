@@ -71,13 +71,13 @@ if __name__ == '__main__':
     item = Detail(
         expense_category = 'Misc',
         expense_sub_category = 'Grocery',
-        expense_detail = {'location' : 'Red Wing, MN', 'vendor': 'Simple Abundance', 'Balance on Account' : 41.08},
-        #expense_detail = {'location' : 'Red Wing, MN', 'vendor' : 'Target'},
-        #expense_detail = {'location' : 'Red Wing, MN', 'gallons' : 12.631, 'mileage' : 162244},
+        #expense_detail = {'location' : 'Red Wing, MN', 'vendor': 'Simple Abundance', 'Balance on Account' : 41.08},
+        expense_detail = {'location' : ', Red Wing, MN', 'vendor' : 'Target'},
+        #expense_detail = {'location' : 'Red Wing, MN', 'gallons' : 15.186, 'mileage' : 162471},
         #expense_detail = { 'location' : 'Online', 'vendor' : 'Zoom'},
-        date = '2021-10-05T19:01:18Z',
-        amount = 15.60,
-        tender = 'prepaid'
+        date = '2021-10-09T20:13:00Z',
+        amount = 10.18,
+        tender = 'amex applepay *2008'
     )
 
     try:

@@ -1,11 +1,13 @@
+import re
 from sqlalchemy import create_engine
 from sqlalchemy.sql.elements import True_
 from sqlalchemy.sql.expression import null, nullslast
 from sqlalchemy.sql.operators import as_
 from sqlalchemy import Column, Integer, String, ForeignKey, Float, DateTime, Text, Table
 #from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base, relation, relationship
+from sqlalchemy.orm import relation, relationship
 from sqlalchemy.sql.sqltypes import Date
+from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
@@ -23,12 +25,6 @@ class Expense(Base):
     tender = Column(String(50))
     expense_detail = Column(Text)
 
-expense_xref = Table('expense_xref', Base.metadata,
-    Column('expense_category_id', ForeignKey('expense_category.id')),
-    Column('expense_sub_category_id', ForeignKey('expense_sub_category.id'))
-    )
-
-
 class Expense_sub_category(Base):
     ''' The sub-category of the expense
     '''
@@ -38,6 +34,20 @@ class Expense_sub_category(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
     expense_sub_category = Column(String(25), nullable=False)
 
+    def __repr__(self):
+        return (f"Expense_sub_category: (id {self.id}, expense_sub_category: {self.expense_sub_category})")
+
+class Expense_xref(Base):
+    #The xref which ties allowable sub-categories to to categories
+
+    __tablename__ = 'expense_xref'
+
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    expense_category_id = Column(Integer, ForeignKey('expense_category.id'), nullable=False)
+    expense_sub_category_id = Column(Integer, ForeignKey('expense_sub_category.id'), nullable=False)
+    expense_sub_category = relationship("Expense_sub_category")
+    expense_category = relationship("Expense_category")
+
 class Expense_category(Base):
     '''  The accounting category to which the expense is assigned
     '''
@@ -45,19 +55,12 @@ class Expense_category(Base):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     expense_category = Column(String(25), nullable=False)
-    expense_sub_categories = relationship(Expense_sub_category, secondary=expense_xref)
+    expense_sub_categories = relationship("Expense_sub_category", secondary="expense_xref", overlaps="expense_sub_category")
 
-'''
-class Expense_xref(Base):
-    #The xref which ties allowable sub-categories to to categories
+    def __repr__(self):
+        return(f"Expense_Category (Id: {self.id}, Expense_category: {self.expense_category}, Childred: {self.expense_sub_categories}")
 
 
-    __tablename__ = 'expense_xref'
-
-    id = Column(Integer, autoincrement=True, primary_key=True)
-    expense_category_id = Column(Integer, ForeignKey('expense_category.id'), nullable=False)
-    expense_sub_category_id = Column(Integer, ForeignKey('expense_sub_category.id'), nullable=False)
-'''
 
 if __name__ == '__main__':
     try:

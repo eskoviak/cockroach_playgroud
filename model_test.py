@@ -1,15 +1,23 @@
 import datetime
 import json
 
-from sqlalchemy import create_engine, select
+from sqlalchemy import create_engine, select, text
 from sqlalchemy.orm import Session, sessionmaker
-from sqlalchemy.sql.sqltypes import Date, TEXT
+from sqlalchemy.sql.sqltypes import Date
 from sqlalchemy_cockroachdb import run_transaction
-import models
+from models import Expense_category, Expense_sub_category, Expense_xref
 
+
+stmt = '''
+SELECT expense_sub_category, esc.id 
+FROM Expense_sub_category AS esc
+JOIN Expense_xref ON expense_sub_category_id = esc.id
+JOIN Expense_category AS ec ON ec.id = expense_category_id
+WHERE ec.expense_category = 'Misc';
+'''
 def get_sub_categories(session, category):
     #print(session.query(models.Expense_category, models.Expense_category.expense_sub_categories))
-    return session.query(models.Expense_category, models.Expense_category.expense_sub_categories)
+    return session.query(Expense_category, Expense_category.expense_sub_categories)
 
 if __name__ == '__main__':
     try:
@@ -20,6 +28,8 @@ if __name__ == '__main__':
         print('{0}'.format(e))
 
     with Session(engine) as s:
-        result = s.execute(select(models.Expense_category, models.Expense_category.expense_sub_categories).filter(models.Expense_category.expense_category == 'Misc'))
-        print(result.scalars().all())
+        result = s.execute(select(Expense_category, Expense_category.expense_sub_categories).filter(Expense_category.expense_category == 'Misc'))
+        #result = s.execute(text(stmt))
+        for row in result.scalars():
+            print(row)
 
