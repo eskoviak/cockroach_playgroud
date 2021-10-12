@@ -1,0 +1,39 @@
+{
+    "receipts" : [
+        {
+            "expense_cateogry" : "Misc",
+            "expense_sub_category" : "Grocery",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "vendor" : "Family Fare"
+            },
+            "date" : "2021-10-11T14:16:00Z",
+            "amount" : 6.62,
+            "tender" : "cash"
+        },
+        {
+            "expense_cateogry" : "Vehicle",
+            "expense_sub_category" : "Fuel",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "gallons" : 7.560,
+                "mileage" : 162606
+            },
+            "date" : "2021-10-10T17:40:20Z",
+            "amount" : 27.96,
+            "tender" : "USB inserted *"
+        },
+        {
+            "expense_cateogry" : "Misc",
+            "expense_sub_category" : "Grocery",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "vendor" : "Simple Abundance",
+                "balance on account" : 205.80
+            },
+            "date" : "2021-10-11T20:28:00Z",
+            "amount" : 32.58,
+            "tender" : "prepaid"
+        }
+    ]
+}
