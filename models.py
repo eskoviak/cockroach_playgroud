@@ -45,8 +45,8 @@ class Expense_xref(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
     expense_category_id = Column(Integer, ForeignKey('expense_category.id'), nullable=False)
     expense_sub_category_id = Column(Integer, ForeignKey('expense_sub_category.id'), nullable=False)
-    expense_sub_category = relationship("Expense_sub_category")
-    expense_category = relationship("Expense_category")
+    #expense_sub_category = relationship("Expense_sub_category")
+    #expense_category = relationship("Expense_category")
 
 class Expense_category(Base):
     '''  The accounting category to which the expense is assigned
@@ -55,7 +55,7 @@ class Expense_category(Base):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     expense_category = Column(String(25), nullable=False)
-    expense_sub_categories = relationship("Expense_sub_category", secondary="expense_xref", overlaps="expense_sub_category")
+    #expense_sub_categories = relationship("Expense_sub_category", secondary="expense_xref", overlaps="expense_sub_category")
 
     def __repr__(self):
         return(f"Expense_Category (Id: {self.id}, Expense_category: {self.expense_category}, Childred: {self.expense_sub_categories}")

@@ -1,9 +1,9 @@
 import datetime
 import json
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import session, sessionmaker
-from sqlalchemy.sql.sqltypes import Date, TEXT
+from sqlalchemy.sql.sqltypes import Date
 from sqlalchemy_cockroachdb import run_transaction
 
 from models import Expense, Expense_category, Expense_sub_category
@@ -24,15 +24,16 @@ def get_expense_sub_categories(session, category):
         )
         
 
-get_allowed_sub_category_sql = """
-SELECT expense_sub_category, id 
-FROM Expense_sub_category
-WHERE  id IN 
-    (SELECT expense_sub_category_id FROM Expense_xref
-    WHERE expense_category_id = (
-        SELECT id FROM Expense_category WHERE expense_category = 'Misc'
-    )
-);"""
+get_allowed_sub_category_stmt = text("""
+SELECT expense_sub_category, esc.id 
+FROM Expense_sub_category AS esc
+JOIN Expense_xref ON expense_sub_category_id = esc.id
+JOIN Expense_category AS ec ON ec.id = expense_category_id
+WHERE ec.expense_category = :category;
+""")
+
+def get_sub_categories(s, c):
+    return s.execute(get_allowed_sub_category_stmt.bindparams(category=c))
 
 def add_expense(session, detail):
     new_expense = []
@@ -52,9 +53,7 @@ def add_expense(session, detail):
 
     session.add_all(new_expense)
 
-
-
-
+'''
 from dataclasses import dataclass, asdict
 @dataclass
 class Detail:
@@ -64,10 +63,18 @@ class Detail:
         date : str
         amount: float
         tender : str
+'''
+
+import json
+def bulk_load(filename) -> list():
+    fp = open(filename, 'r')
+    return json.load(fp)['receipts']
+
 
 
 
 if __name__ == '__main__':
+    '''
     item = Detail(
         expense_category = 'Misc',
         expense_sub_category = 'Grocery',
@@ -79,7 +86,7 @@ if __name__ == '__main__':
         amount = 10.18,
         tender = 'amex applepay *2008'
     )
-
+    '''
     try:
         psycopg_uri = url = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
         engine = create_engine(psycopg_uri)
@@ -87,8 +94,16 @@ if __name__ == '__main__':
         print('Failed to connect to database.')
         print('{0}'.format(e))
 
-    run_transaction(sessionmaker(bind=engine),
-        lambda s : add_expense(s, asdict(item)))
+#    for item in bulk_load('./json/receipt.json'):
+#        #print(item)
+#        run_transaction(sessionmaker(bind=engine),
+#            lambda s : add_expense(s, item))
 
 #    print(run_transaction(sessionmaker(bind=engine),
 #        lambda s : get_categories(s)))
+
+    result = run_transaction(sessionmaker(bind=engine),
+        lambda s : get_sub_categories(s,'Misc'))
+
+    for row in result:
+        print(row)
