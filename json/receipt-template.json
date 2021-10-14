@@ -1,0 +1,18 @@
+{
+    "receipts" : [
+        {
+            "expense_category" : "",
+            "expense_sub_category" : "",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "vendor" : "",
+                "mileage" : 0,
+                "gallons" : 0,
+                "balance on account" : 0
+            },
+            "date" : "2021-10-Z",
+            "amount" : 0,
+            "tender" : ""
+        }
+    ]
+}

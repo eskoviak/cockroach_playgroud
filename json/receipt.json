@@ -1,18 +1,26 @@
 {
     "receipts" : [
         {
-            "expense_category" : "",
-            "expense_sub_category" : "",
+            "expense_category" : "Business",
+            "expense_sub_category" : "Services",
+            "expense_detail" : {
+                "location" : "San Mateo, CA",
+                "vendor" : "GoPro"
+            },
+            "date" : "2021-10-11T00:00Z",
+            "amount" : 4.99,
+            "tender" : "amex recurring *2008"
+        },
+        {
+            "expense_category" : "Misc",
+            "expense_sub_category" : "Grocery",
             "expense_detail" : {
                 "location" : "Red Wing, MN",
-                "vendor" : "",
-                "mileage" : 0,
-                "gallons" : 0,
-                "balance on account" : 0
+                "vendor" : "Walmart"
             },
-            "date" : "2021-10-Z",
-            "amount" : 0,
-            "tender" : ""
+            "date" : "2021-10-13T23:03:22Z",
+            "amount" : 28.38,
+            "tender" : "amex inserted *2008"
         }
     ]
 }
