@@ -8,7 +8,40 @@ from sqlalchemy_cockroachdb import run_transaction
 
 from models import Expense, Expense_category, Expense_sub_category
 
-def get_expense_categories(session):
+import json
+def __bulk_load(filename) -> list():
+    fp = open(filename, 'r')
+    return json.load(fp)['receipts']
+
+def __get_session() -> session:
+    try:
+        psycopg_uri = url = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
+        return sessionmaker(bind=create_engine(psycopg_uri))
+    except Exception as e:
+        print('Failed to connect to database.')
+        print('{0}'.format(e))
+        return None
+
+def add_expense(details):
+    ## Todo here:  what part in and out of run_transaction--how do I get the appropriate lookups outside of the transaction container?
+    new_expense = []
+    
+    for detail in details:
+        expense_category = session.query(Expense_category).filter(Expense_category.expense_category == detail['expense_category']).first()
+        expense_sub_category = session.query(Expense_sub_category).filter(Expense_sub_category.expense_sub_category == detail['expense_sub_category']).first()
+
+        new_expense.append(Expense(
+            date = detail['date'],
+            expense_category_id = expense_category.id,
+            expense_sub_category_id = expense_sub_category.id,
+            amount = detail['amount'],
+            tender = detail['tender'],
+            expense_detail = json.dumps(detail['expense_detail'])
+        ))
+
+    session.add_all(new_expense)
+
+def get_expense_categories():
     expense_categories = {}
     items = session.query(Expense_category)
     for item in items:
@@ -34,7 +67,7 @@ WHERE ec.expense_category = :category;
 
 def get_sub_categories(s, c):
     return s.execute(get_allowed_sub_category_stmt.bindparams(category=c))
-
+'''
 def add_expense(session, detail):
     new_expense = []
 
@@ -52,6 +85,7 @@ def add_expense(session, detail):
     ))
 
     session.add_all(new_expense)
+'''
 
 '''
 from dataclasses import dataclass, asdict
@@ -65,10 +99,7 @@ class Detail:
         tender : str
 '''
 
-import json
-def bulk_load(filename) -> list():
-    fp = open(filename, 'r')
-    return json.load(fp)['receipts']
+
 
 
 
@@ -86,7 +117,7 @@ if __name__ == '__main__':
         amount = 10.18,
         tender = 'amex applepay *2008'
     )
-    '''
+
     try:
         psycopg_uri = url = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
         engine = create_engine(psycopg_uri)
@@ -107,3 +138,4 @@ if __name__ == '__main__':
 
     for row in result:
         print(row)
+    '''
