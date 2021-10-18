@@ -1,23 +1,19 @@
-import datetime
 import json
-
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import session, sessionmaker
-from sqlalchemy.sql.sqltypes import Date
 from sqlalchemy_cockroachdb import run_transaction
 from models import Expense, Expense_category, Expense_sub_category
-import json
 
-"""
-  Private Functions
-"""
+
+# Private Functions
+
 def __get_session() -> sessionmaker:
     """Gets a sessionmaker object
     
-    Opens the cockroach instance based on the URL and returns the session maker object which can be used by other routines.
+    Opens the cockroach instance based on the URL and returns the sessionmaker object which can be used by other routines.
     """
     try:
-        psycopg_uri = url = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
+        psycopg_uri = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
         return sessionmaker(bind=create_engine(psycopg_uri))
     except Exception as e:
         print('Failed to connect to database.')
@@ -43,15 +39,20 @@ def __insert_expense(s: session, details : dict):
         ))
     s.add_all(new_expense)    
 
-"""
-  Public Functions
-"""
-def bulk_load(filename) -> dict():
-    fp = open(filename, 'r')
-    return json.load(fp)['receipts']
+# Public Functions
+
+def bulk_load(filename : str) -> dict():
+    assert filename.__len__() > 0, 'filename not specified'
+    try:
+        fp = open(filename, mode='r', encoding='utf-8')
+        return json.load(fp)['receipts']
+    except FileNotFoundError as fne:
+        print(f"File not found: ${fne.filename}")
+        raise FileNotFoundError
+        
 
 def add_expense(details: dict() ):
-    """The add_expense function 
+    """The add_expense function
     
     Adds the expenses contained in the details dictionary by calling the internal insert function
     """
