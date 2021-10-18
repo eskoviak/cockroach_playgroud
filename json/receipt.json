@@ -21,6 +21,121 @@
             "date" : "2021-10-13T23:03:22Z",
             "amount" : 28.38,
             "tender" : "amex inserted *2008"
-        }
+        },
+        {
+            "expense_category" : "Business",
+            "expense_sub_category" : "Services",
+            "expense_detail" : {
+                "location" : "",
+                "vendor" : "Dreamhost",
+                "service" : "Web hosting eskoviak.net annual"
+            },
+            "date" : "2021-10-14T13:00:00Z",
+            "amount" : 16.99,
+            "tender" : "amex webpay *2008"
+        },
+        {
+            "expense_category" : "Business",
+            "expense_sub_category" : "Services",
+            "expense_detail" : {
+                "location" : "",
+                "vendor" : "Microsoft",
+                "service" : "O365 Monthly"
+            },
+            "date" : "2021-10-14T13:00:00Z",
+            "amount" : 25.25,
+            "tender" : "amex recurring *2008"
+        },
+	{
+            "expense_category" : "Misc",
+            "expense_sub_category" : "Home",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "vendor" : "Menards"
+            },
+            "date" : "2021-10-14T22:55:00Z",
+            "amount" : 4.96,
+            "tender" : "cash"
+	},
+    {
+        "expense_category" : "Personal",
+        "expense_sub_category" : "Entertainment",
+        "expense_detail" : {
+            "location" : "Minneapolis, MN",
+            "vendor" : "Hyatt"
+        },
+        "date" : "2021-10-17T15:30:00Z",
+        "amount" : 227.04,
+        "tender" : "amex swiped *2008"
+    },
+    {
+        "expense_category" : "Vehicle",
+        "expense_sub_category" : "Fuel",
+        "expense_detail" : {
+            "location" : "Cottage Grove, MN",
+            "vendor" : "Speedway",
+            "gallons" : 16.601,
+            "mileage" : 162878
+        },
+        "date" : "2021-10-17T16:11:00Z",
+        "amount" : 59.75,
+        "tender" : "amex inserted *2008"
+    },
+    {
+        "expense_category" : "Personal",
+        "expense_sub_category" : "Apparel",
+        "expense_detail" : {
+            "location" : "Apple Valley, MN",
+            "vendor" : "Under Armor"
+        },
+        "date" : "2021-10-16T18:12:23Z",
+        "amount" : 83.98,
+        "tender" : "amex inserted *2008"
+    },
+    {
+        "expense_category" : "Misc",
+        "expense_sub_category" : "Grocery",
+        "expense_detail" : {
+            "location" : "Rochester, MN",
+            "vendor" : "Costco"
+        },
+        "date" : "2021-10-15T20:56:00Z",
+        "amount" : 75.45,
+        "tender" : "visa inserted *6624"
+    },
+    {
+        "expense_category" : "Misc",
+        "expense_sub_category" : "Grocery",
+        "expense_detail" : {
+            "location" : "Red Wing, MN",
+            "vendor" : "Simple Abundance",
+            "balance on account": 173.09
+        },
+        "date" : "2021-10-15T18:16:35Z",
+        "amount" : 35.41,
+        "tender" : "prepaid"
+    },
+    {
+        "expense_category" : "Personal",
+        "expense_sub_category" : "Entertainment",
+        "expense_detail" : {
+            "location" : "Minneapolis, MN",
+            "vendor" : "Normandy Restaurant"
+        },
+        "date" : "2021-10-16T23:22:00Z",
+        "amount" : 40.42,
+        "tender" : "amex inserted *2008"
+    },
+    {
+        "expense_category" : "Misc",
+        "expense_sub_category" : "Grocery",
+        "expense_detail" : {
+            "location" : "Cottage Grove, MN",
+            "vendor" : "HyVee"
+        },
+        "date" : "2021-10-17T16:25:00Z",
+        "amount" : 30.40,
+        "tender" : "amex contactless *2008"
+    }
     ]
 }
