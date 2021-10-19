@@ -1,7 +1,9 @@
-from budget import bulk_load
+from budget import Budget
 
-print(bulk_load(''))
-#add_expense(bulk_load('json/receipt.json'))
+budget = Budget()
+
+#print(bulk_load(''))
+budget.add_expense(budget.bulk_load('json/receipt.json'))
 
 #print(get_expense_categories())
 
