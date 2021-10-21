@@ -2,14 +2,36 @@
     "receipts" : [
         {
             "expense_category" : "Utility",
-            "expense_sub_category" : "Phone",
+            "expense_sub_category" : "Internet",
             "expense_detail" : {
                 "location" : "Online",
-                "vendor" : "Verizon"
+                "vendor" : "HBC"
             },
-            "date" : "2021-10-19T22:58:00Z",
-            "amount" : 179.07,
+            "date" : "2021-10-20T00:00:00Z",
+            "amount" : 99.61,
             "tender" : "autopay *6195"
-        }          
+        },
+        {
+            "expense_category" : "Personal",
+            "expense_sub_category" : "Apparel",
+            "expense_detail" : {
+                "location" : "Online",
+                "vendor" : "Under Armour"
+            },
+            "date" : "2021-10-14T00:00:00Z",
+            "amount" : 28.23,
+            "tender" : "paypal *6195"           
+        },
+        {
+            "expense_category" : "Misc",
+            "expense_sub_category" : "Grocery",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "vendor" : "Walmart"
+            },
+            "date" : "2021-10-20T17:34:23Z",
+            "amount" : 19.54,
+            "tender" : "amex inserted *2008"            
+        }      
     ]
 }
