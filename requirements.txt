@@ -1,4 +1,13 @@
+astroid==2.8.3
 greenlet==1.1.1
+isort==5.9.3
+lazy-object-proxy==1.6.0
+mccabe==0.6.1
+platformdirs==2.4.0
 psycopg2==2.9.1
+pylint==2.11.1
 SQLAlchemy==1.4.23
 sqlalchemy-cockroachdb==1.4.0
+toml==0.10.2
+typing-extensions==3.10.0.2
+wrapt==1.13.2
