@@ -24,7 +24,7 @@ class Budget:
         
         Opens the cockroach instance based on the URL and returns the sessionmaker object which can be used by other routines.
         """
-        psycopg_uri = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
+        psycopg_uri = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/home/eskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
         return sessionmaker(bind=create_engine(psycopg_uri))
 
     def _insert_expense(self, s: session, details : dict):

@@ -1,37 +1,50 @@
 {
     "receipts" : [
         {
+            "expense_category" : "Vehicle",
+            "expense_sub_category" : "Fuel",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "vendor" : "Wilson Oil",
+                "mileage" : 163118,
+                "gallons" : 14.789
+            },
+            "date" : "2021-10-22T21:25:00Z",
+            "amount" : 50.13,
+            "tender" : "mc contactless *2301"             
+        },
+        {
             "expense_category" : "Misc",
             "expense_sub_category" : "Grocery",
             "expense_detail" : {
                 "location" : "Red Wing, MN",
-                "vendor" : "Walmart"
+                "vendor" : "Family Fare"
             },
-            "date" : "2021-10-21T22:48:17Z",
-            "amount" : 18.70,
-            "tender" : "visa inserted *6624"             
+            "date" : "2021-10-22T21:08:00Z",
+            "amount" : 10.28,
+            "tender" : "visa inserted *6624"              
         },
         {
             "expense_category" : "Misc",
             "expense_sub_category" : "Grocery",
             "expense_detail" : {
-                "location" : "Apple Valley, MN",
-                "vendor" : "Fresh Thyme"
+                "location" : "Red Wing, MN",
+                "vendor" : "Buchanan"
             },
-            "date" : "2021-10-22T18:26:37Z",
-            "amount" : 54.00,
-            "tender" : "amex contactless *2008"             
+            "date" : "2021-10-22T18:53:00Z",
+            "amount" : 17.97,
+            "tender" : "cash"              
         },
         {
-            "expense_category" : "Misc",
-            "expense_sub_category" : "Recreation",
+            "expense_category" : "Vehicle",
+            "expense_sub_category" : "Maintenance",
             "expense_detail" : {
-                "location" : "Bloomington, MN",
-                "vendor" : "REI"
+                "location" : "Red Wing, MN",
+                "vendor" : "Ace Hardware"
             },
-            "date" : "2021-10-22T19:55:00Z",
-            "amount" : 12.80,
-            "tender" : "mc contactless *2301"             
+            "date" : "2021-10-22T17:32:00Z",
+            "amount" : 16.50,
+            "tender" : "amex contactless *2008"            
         }   
     ]
 }
