@@ -1,7 +1,6 @@
-**/.postgresql
 **/.ipynb_checkpoints
 **/.vscode
-**/__pycache__
+**/.postgresql
 
 **/bin
 **/Scripts
@@ -19,3 +18,7 @@
 **/pyvenv.cfg
 
 **/.DS_store
+
+**/*.pyc
+
+**/__pycache__

@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://eskoviak.com/schemas/vehicle-expense-detail-schema.json",
+    "title": "Vehicle Expense Detail",
+    "description": "Detail object added to a vehicle expense entry",
+    "type": "object",
+    "properties": {
+        "gallons" : {
+            "description" : "for a fuel expense, the gallons pumped",
+            "type" : "number"
+        },
+        "mileage" : {
+            "description" : "the mileage",
+            "type" : "integer"
+        },
+        "location" : {
+            "description" : "The location of the expense",
+            "type" : "string"
+        }
+    },
+    "required": ["mileage"]
+}
