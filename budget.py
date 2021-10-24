@@ -76,7 +76,7 @@ class Budget:
         run_transaction(self._get_session(), 
             lambda s : self._insert_expense(s, details))
 
-    def get_expense_categories() -> dict():
+    def get_expense_categories(self) -> dict():
         """returns a dict object of expense categories
         
         Format:   { expense_category.name : expense_category.id}
@@ -102,3 +102,12 @@ class Budget:
             expense_sub_categories[t[0]] = t[1]
         
         return expense_sub_categories
+
+    def get_chart_of_accounts(self) -> dict():
+        coa = {}
+        categories = self.get_expense_categories()
+        for category in categories.keys():
+            sub_categories = self.get_sub_categories(category)
+            coa[category] = sub_categories.keys()
+
+        return coa
