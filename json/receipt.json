@@ -2,14 +2,58 @@
     "receipts" : [
         {
             "expense_category" : "Misc",
-            "expense_sub_category" : "Grocery",
+            "expense_sub_category" : "Recreation",
+            "expense_detail" : {
+                "location" : "On-line",
+                "vendor" : "REI"
+            },
+            "date" : "2021-10-20T00:00:00Z",
+            "amount" : 139.73,
+            "tender" : "mc online *2301"             
+        },
+        {
+            "expense_category" : "Misc",
+            "expense_sub_category" : "Recreation",
+            "expense_detail" : {
+                "location" : "On-line",
+                "vendor" : "REI"
+            },
+            "date" : "2021-10-22T00:00:00Z",
+            "amount" : 252.33,
+            "tender" : "mc online *2301"  
+        },
+        {
+            "expense_category" : "Misc",
+            "expense_sub_category" : "Recreation",
+            "expense_detail" : {
+                "location" : "On-line",
+                "vendor" : "REI"
+            },
+            "date" : "2021-10-22T00:00:00Z",
+            "amount" : 245.89,
+            "tender" : "mc online *2301"  
+        },
+        {
+            "expense_category" : "Vehicle",
+            "expense_sub_category" : "Maintenance",
             "expense_detail" : {
                 "location" : "Red Wing, MN",
-                "vendor" : "Walmart"
+                "vendor" : "Runnings"
             },
-            "date" : "2021-10-24T15:55:19Z",
-            "amount" : 22.75,
-            "tender" : "amex inserted *2008"             
-        }           
+            "date" : "2021-10-24T20:19:53Z",
+            "amount" : 2.14,
+            "tender" : "cash"              
+        },
+        {
+            "expense_category" : "Vehicle",
+            "expense_sub_category" : "Maintenance",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "vendor" : "Oreilly Autopart"
+            },
+            "date" : "2021-10-24T20:47:00Z",
+            "amount" : 18.23,
+            "tender" : "cash"  
+        }        
     ]
 }
