@@ -1,8 +1,8 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://eskoviak.com/schemas/vehicle-expense-detail-schema.json",
-    "title": "Vehicle Expense Detail",
-    "description": "Detail object added to a vehicle expense entry",
+    "$id": "https://eskoviak.com/schemas/misc-expense-detail-schema.json",
+    "title": "Misc Expense Detail",
+    "description": "Detail object added to a misc expense entry",
     "type": "object",
     "properties": {
         "location" : {
@@ -13,10 +13,10 @@
             "description" : "The provider of the service",
             "type" : "string"
         },
-        "balance-on_acct" : {
+        "balance on account" : {
             "description" : "The balance on account",
             "type" : "number"
         }
     },
-    "required": ["location"]
+    "required": ["location", "vendor"]
 }

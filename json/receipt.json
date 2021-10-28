@@ -1,59 +1,26 @@
 {
     "receipts" : [
         {
-            "expense_category" : "Misc",
-            "expense_sub_category" : "Recreation",
+            "expense_category" : "Utility",
+            "expense_sub_category" : "Electric",
             "expense_detail" : {
                 "location" : "On-line",
-                "vendor" : "REI"
+                "vendor" : "XCel"
             },
-            "date" : "2021-10-20T00:00:00Z",
-            "amount" : 139.73,
-            "tender" : "mc online *2301"             
+            "date" : "2021-10-26T00:00:00Z",
+            "amount" : 38.13,
+            "tender" : "usb autopay *6195"             
         },
         {
-            "expense_category" : "Misc",
-            "expense_sub_category" : "Recreation",
+            "expense_category" : "Personal",
+            "expense_sub_category" : "Donation",
             "expense_detail" : {
                 "location" : "On-line",
-                "vendor" : "REI"
+                "vendor" : "MN Public Radio"
             },
-            "date" : "2021-10-22T00:00:00Z",
-            "amount" : 252.33,
-            "tender" : "mc online *2301"  
-        },
-        {
-            "expense_category" : "Misc",
-            "expense_sub_category" : "Recreation",
-            "expense_detail" : {
-                "location" : "On-line",
-                "vendor" : "REI"
-            },
-            "date" : "2021-10-22T00:00:00Z",
-            "amount" : 245.89,
-            "tender" : "mc online *2301"  
-        },
-        {
-            "expense_category" : "Vehicle",
-            "expense_sub_category" : "Maintenance",
-            "expense_detail" : {
-                "location" : "Red Wing, MN",
-                "vendor" : "Runnings"
-            },
-            "date" : "2021-10-24T20:19:53Z",
-            "amount" : 2.14,
-            "tender" : "cash"              
-        },
-        {
-            "expense_category" : "Vehicle",
-            "expense_sub_category" : "Maintenance",
-            "expense_detail" : {
-                "location" : "Red Wing, MN",
-                "vendor" : "Oreilly Autopart"
-            },
-            "date" : "2021-10-24T20:47:00Z",
-            "amount" : 18.23,
-            "tender" : "cash"  
-        }        
+            "date" : "2021-10-25T00:00:00Z",
+            "amount" : 15.00,
+            "tender" : "usb autopay *6195"   
+        }      
     ]
 }

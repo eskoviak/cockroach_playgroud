@@ -99,15 +99,15 @@ class Budget:
 
         expense_sub_categories = {}
         for t in result.all():
-            expense_sub_categories[t[0]] = t[1]
+            expense_sub_categories[t[0]]=t[1]
         
         return expense_sub_categories
 
     def get_chart_of_accounts(self) -> dict():
         coa = {}
-        categories = self.get_expense_categories()
-        for category in categories.keys():
-            sub_categories = self.get_sub_categories(category)
-            coa[category] = sub_categories.keys()
+        sub_categories = []
+        for category in self.get_expense_categories().keys():
+            sub_categories in self.get_sub_categories(category)
+            coa[category] = { "sub-categories" : sub_categories.__str__}
 
         return coa

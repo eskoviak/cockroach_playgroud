@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://eskoviak.com/schemas/business-expense-detail-schema.json",
+    "title": "Business Expense Detail",
+    "description": "Detail object added to a Business expense entry",
+    "type": "object",
+    "properties": {
+        "location" : {
+            "description" : "The location of the expense",
+            "type" : "string"
+        },
+        "vendor" : {
+            "description" : "the name of the vendor providing the service",
+            "type" : "string"
+        },
+        "service" : {
+            "description" : "the service being provided",
+            "type" : "string"
+        }
+    },
+    "required": ["service", "vendor", "location"]
+}
