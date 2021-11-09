@@ -11,4 +11,4 @@ SELECT expense_sub_category, esc.id
 FROM Expense_sub_category AS esc
 JOIN Expense_xref ON expense_sub_category_id = esc.id
 JOIN Expense_category AS ec ON ec.id = expense_category_id
-WHERE ec.expense_category = 'Vehicle';
+WHERE ec.expense_category = 'Misc';
