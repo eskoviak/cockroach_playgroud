@@ -5,56 +5,22 @@
             "expense_sub_category" : "Grocery",
             "expense_detail" : {
                 "location" : "Red Wing, MN",
-                "vendor" : "Family Fare"
-            },
-            "date" : "2021-11-06T21:07:00Z",
-            "amount" : 11.59,
-            "tender" : "amex inserted *2008"                
-        },
-        {
-            "expense_category" : "Misc",
-            "expense_sub_category" : "Grocery",
-            "expense_detail" : {
-                "location" : "Red Wing, MN",
                 "vendor" : "Walmart"
             },
-            "date" : "2021-11-06T22:31:00Z",
-            "amount" : 38.99,
-            "tender" : "mastercard inserted *2301"            
+            "date" : "2021-11-11T23:38:00Z",
+            "amount" : 14.63,
+            "tender" : "mc inserted *2301"                
         },
         {
             "expense_category" : "Misc",
             "expense_sub_category" : "Grocery",
             "expense_detail" : {
-                "location" : "Red Wing, MN",
-                "vendor" : "Walmart"
+                "location" : "Woodbury, MN",
+                "vendor" : "Kowalskis"
             },
-            "date" : "2021-11-07T19:48:00Z",
-            "amount" : 24.18,
-            "tender" : "mastercard inserted *2301"           
-        },
-        {
-            "expense_category" : "Misc",
-            "expense_sub_category" : "Grocery",
-            "expense_detail" : {
-                "location" : "Red Wing, MN",
-                "vendor" : "Simple Abundance",
-                "balance on account" : 36.48
-            },
-            "date" : "2021-11-07T17:43:00Z",
-            "amount" : 10.54,
-            "tender" : "prepaid"             
-        },
-        {
-            "expense_category" : "Vehicle",
-            "expense_sub_category" : "Fuel",
-            "expense_detail" : {
-                "location" : "Red Wing, MN",
-                "vendor" : "Kwik Trip"
-            },
-            "date" : "2021-11-06T18:02:00Z",
-            "amount" : 59.79,
-            "tender" : "amex contactless *2008" 
+            "date" : "2021-11-12T19:37:00Z",
+            "amount" : 63.58,
+            "tender" : "mc inserted *2301"             
         }
     ]
 }
