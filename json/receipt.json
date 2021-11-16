@@ -5,22 +5,22 @@
             "expense_sub_category" : "Grocery",
             "expense_detail" : {
                 "location" : "Red Wing, MN",
-                "vendor" : "Walmart"
+                "vendor" : "Target"
             },
-            "date" : "2021-11-11T23:38:00Z",
-            "amount" : 14.63,
-            "tender" : "mc inserted *2301"                
+            "date" : "2021-11-14T21:06:00Z",
+            "amount" : 20.26,
+            "tender" : "mc contactless *2301"                
         },
         {
             "expense_category" : "Misc",
-            "expense_sub_category" : "Grocery",
+            "expense_sub_category" : "Recreation",
             "expense_detail" : {
-                "location" : "Woodbury, MN",
-                "vendor" : "Kowalskis"
+                "location" : "On line",
+                "vendor" : "B&H Photo"
             },
-            "date" : "2021-11-12T19:37:00Z",
-            "amount" : 63.58,
-            "tender" : "mc inserted *2301"             
+            "date" : "2021-11-11T00:00:00Z",
+            "amount" : 209.26,
+            "tender" : "USB paypal"             
         }
     ]
 }
