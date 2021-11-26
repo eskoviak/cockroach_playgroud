@@ -1,0 +1,19 @@
+=================
+Chart of Accounts
+=================
+
+==================  ============================
+Expense Category    Expense Sub-Category       
+==================  ============================
+Misc                Grocery                    
+                    Home                       
+                    Houseware                  
+                    Recreation                 
+                    Storage                    
+==================  ============================
+Personal            Apparel                    
+                    Health                     
+                    Entertainment              
+                    Donation                   
+==================  ============================
+
