@@ -16,7 +16,15 @@
         "location" : {
             "description" : "The location of the expense",
             "type" : "string"
+        },
+        "vendor" : {
+            "description" : "the name of the vendor providing the service",
+            "type" : "string"
+        },
+        "description" : {
+            "description" : "service provided",
+            "type" : "string"
         }
     },
-    "required": ["mileage"]
+    "required": ["mileage", "vendor", "location"]
 }

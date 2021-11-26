@@ -1,0 +1,9 @@
+{
+	"vehicle" :  {
+		"sub-categories" : [
+			"string1",
+			"string2",
+			"string3"
+		]
+	}
+}

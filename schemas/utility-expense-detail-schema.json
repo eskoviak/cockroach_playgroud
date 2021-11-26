@@ -1,0 +1,18 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://eskoviak.com/schemas/utility-expense-detail-schema.json",
+    "title": "Utility Expense Detail",
+    "description": "Detail object added to a Utility expense entry",
+    "type": "object",
+    "properties": {
+        "location" : {
+            "description" : "The location of the expense",
+            "type" : "string"
+        },
+        "vendor" : {
+            "description" : "the name of the vendor providing the service",
+            "type" : "string"
+        }
+    },
+    "required": ["vendor", "location"]
+}

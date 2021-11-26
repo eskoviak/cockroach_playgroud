@@ -24,7 +24,7 @@ class Budget:
         
         Opens the cockroach instance based on the URL and returns the sessionmaker object which can be used by other routines.
         """
-        psycopg_uri = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
+        psycopg_uri = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/home/eskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
         return sessionmaker(bind=create_engine(psycopg_uri))
 
     def _insert_expense(self, s: session, details : dict):
@@ -76,7 +76,7 @@ class Budget:
         run_transaction(self._get_session(), 
             lambda s : self._insert_expense(s, details))
 
-    def get_expense_categories() -> dict():
+    def get_expense_categories(self) -> dict():
         """returns a dict object of expense categories
         
         Format:   { expense_category.name : expense_category.id}
@@ -99,6 +99,15 @@ class Budget:
 
         expense_sub_categories = {}
         for t in result.all():
-            expense_sub_categories[t[0]] = t[1]
+            expense_sub_categories[t[0]]=t[1]
         
         return expense_sub_categories
+
+    def get_chart_of_accounts(self) -> dict():
+        coa = {}
+        sub_categories = []
+        for category in self.get_expense_categories().keys():
+            sub_categories in self.get_sub_categories(category)
+            coa[category] = { "sub-categories" : sub_categories.__str__}
+
+        return coa
