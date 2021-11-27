@@ -15,7 +15,8 @@ Misc                Grocery -
 Personal            Apparel -                
                     Health -                  
                     Entertainment -              
-                    Donation
+                    Donation -
+                    Electronics
 Vehicle             Fuel -
                     Oil Change -
                     Car Wash -
