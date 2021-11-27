@@ -5,22 +5,35 @@
             "expense_sub_category" : "Grocery",
             "expense_detail" : {
                 "location" : "Red Wing, MN",
-                "vendor" : "Target"
+                "vendor" : "Walmart"
             },
-            "date" : "2021-11-14T21:06:00Z",
-            "amount" : 20.26,
-            "tender" : "mc contactless *2301"                
+            "date" : "2021-11-18T23:17:00Z",
+            "amount" : 26.72,
+            "tender" : "mc inserted *2301"                
         },
         {
             "expense_category" : "Misc",
-            "expense_sub_category" : "Recreation",
+            "expense_sub_category" : "Grocery",
             "expense_detail" : {
-                "location" : "On line",
-                "vendor" : "B&H Photo"
+                "location" : "Red Wing, MN",
+                "vendor" : "Kwik Trip"
             },
-            "date" : "2021-11-11T00:00:00Z",
-            "amount" : 209.26,
-            "tender" : "USB paypal"             
+            "date" : "2021-11-19T12:10:00Z",
+            "amount" : 6.80,
+            "tender" : "mc inserted *2301"              
+        },
+        {
+            "expense_category" : "Vehicle",
+            "expense_sub_category" : "Fuel",
+            "expense_detail" : {
+                "location" : "Red Wing, MN",
+                "vendor" : "Kwik Trip",
+                "mileage" : 163813,
+                "gallons" : 15.582
+            },
+            "date" : "2021-11-19T12:10:00Z",
+            "amount" : 58.42,
+            "tender" : "mc contactless *2301"               
         }
     ]
 }
