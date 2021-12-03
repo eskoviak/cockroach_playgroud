@@ -24,6 +24,7 @@ class Expense(Base):
     amount = Column(Float(asdecimal=True), nullable=False)
     tender = Column(String(50))
     expense_detail = Column(Text)
+    memo = Column(Text)
 
 class Expense_sub_category(Base):
     ''' The sub-category of the expense
@@ -47,6 +48,9 @@ class Expense_xref(Base):
     expense_sub_category_id = Column(Integer, ForeignKey('expense_sub_category.id'), nullable=False)
     #expense_sub_category = relationship("Expense_sub_category")
     #expense_category = relationship("Expense_category")
+
+    def __repr__(self):
+        return (f"Expense_xref: (id {self.id}, expense_category_id {self.expense_category_id}, expense_sub_category_id {self.expense_sub_category_id}")
 
 class Expense_category(Base):
     '''  The accounting category to which the expense is assigned
