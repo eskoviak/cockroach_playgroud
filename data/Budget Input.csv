@@ -1,34 +1,8 @@
 Date,Category,SubCategory,Location,Vendor,Mileage,Gallons,Balance_on_account,Vehicle,Amount,Tender,Memo
-2021-11-19T19:00:00Z,Business,Services,Online,Apple,,,,,31.18,Amex apple pay *2008,Apple One
-2021-11-22T19:00:00Z,Personal,Entertainment,"Colorado Springs, CO",Garden of the Gods,,,,,47,USB inserted *2301,Travel
-2021-11-22T19:00:00Z,Vehicle,Fuel,"Colorado Springs, CO",Kum & Go,,,,Rental,40.91,Amex Insert *2008,Travel
-2021-11-22T19:00:00Z,Personal,Apparel,"Denver, CO",ADM/SHOP,,,,,36.90,Amex Insert *2008,Travel
-2021-11-22T19:00:00Z,Business,Services,Online,Amazoon,,,,,6.43,Amex Insert *2008,AWS
-2021-11-22T19:00:00Z,Misc,Grocery,"Bennett, CO",King Supers,,,,,29.28,Amex Insert *2008,Travel
-2021-11-23T19:00:00Z,Vehicle,Fuel,"Watkins, CO",Kum & Go,,,,Rental,43.24,Amex Insert *2008,Travel
-2021-11-24T19:04:00Z,Personal,Entertainment,"Canyon City, CO",Worlds End Brewing,,,,,40.56,Amex Insert *2008,Travel
-2021-11-24T19:04:00Z,Misc,Grocery,"Canyon City, CO",Safeway,,,,,25,Amex Insert *2008,Travel
-2021-11-25T19:00:00Z,Personal,Apparel,Online,Under Armor,,,,,86.24,Amex apple pay *2008,Workout
-2021-11-25T19:00:00Z,Personal,Electronics,Online,Digital River,,,,,501.42,USB paypal,Camera Lens (Olympus USA)
-2021-11-25T19:00:00Z,Business,Services,Online,USB,,,,,25,USB Xfer, Paypal to cover old pmts from CapOne
-2021-11-24T19:00:00Z,Business,Services,Online,Microsoft,,,,,2.01,USB Other,Monthly charge for storage on personal account
-2021-11-27T13:42:00Z,Personal,Travel,"Denver, CO",National ,,,,,332.15,Amex online *2008,Rental car
-2021-11-27T19:03:00Z,Misc,Grocery,"Apple Valley, MN",Fresh Thyme,,,,,123.32,Visa insert *6624,
-2021-11-27T23:19:00Z,Misc,Grocery ,"Red Wing, MN",Walmart,,,,,54.07,Mc insert *2301,
-2021-11-28T22:27:00Z,Personal,Electronics,"Red Wing, MN",Walmart,,,,,53.56,Mc insert *2301,Tv antenna
-2012-11-28T18:12:00Z,Misc,Grocery,"Rochester, MN",Costco,,,,,29.78,Visa insert *6624,
-2021-11-28T13:50:00-0600,Personal ,Apparel ,"Rochester, MN",Scheels,,,,,57.37,Amex contactless *2008,Gloves
-2021-11-03T14:38:00-0600,Business,Services,Online,AWS,,,,,4.20,amex online *2008,
-2021-11-28T13:28:00-0600,Personal ,Electronics,"Rochester, MN",Best Buy,,,,,97.25,amex contactless *2008,iPad cover
-2021-11-27T12:28:00-0600,Personal,Travel,"St. Paul, MN",Shepard Road Parking,,,,,96.72,amex,Parking re: Denver Trip
-2021-11-24T00:00:00Z,Utility,Electric,Online,Xcel,,,,,31.19,Monthly Electric,
-2021-11-30T11:55:00-0600,Personal ,Electronics,Online ,Apple,,,,,34.60,USB online *6195,Monthly Installment
-2021-12-01T00:00:00Z,Utility,City Svcs,Online,UMS,,,,,57.06,Amex online *2008,Nov non-elec
-2021-12-01T00:00:00Z,Misc,Storage ,Online,Red Wing Self Stor,,,,,148,USB auth *2301,Car Storage
-2021-12-01T10:25:00-0600,Liability,Credit Payment,,Visa *6624,,,,,153.10,USB auth *6195,Nov pmt
-2021-12-01T09:17:00-0600,Misc,Grocery ,"Red Wing, MN ",Family Fare,,,,,4.82,Cash,
-2021-12-02T06:40:00-0600,Misc,Grocery,"Red Wing, MN ",Walmart,,,,,11.96,Amex insert *2008,
-2021-12-02T18:12:00-0600,Misc,Grocery ,"Red Wing, MN",Buchanan Grocery,,,,,23.84,Amex insert *2008,
-2021-12-02T16:23:00-0600,Vehicle,Fuel,"Red Wing, MN",Wilson Oil,164093,16.542,,Jeep Liberty,54.57,amex contactless *2008,
-2021-12-02T16:50:00-0600,Vehicle,Oil Change,"Red Wing, MN",Valvoline,164094,,,Jeep Liberty,100.81,Visa insert *6624,Air Filter
-2021-12-02T15:28:00-0600,Misc,Grocery,"Red Wing, MN",Simple Abundance,,,203.52,,28.91,On Account,
+2021-12-03T15:07:00-06:00,Business,Services,Red Wing MN,USPS,,,,,27.10,Cash,Express mail
+2021-12-03T13:39:00-06:00,Misc,Groceries,Red Wing MN,Walmart,,,,,48.05,Visa inserted *6624,
+2021-12-04T16:06:00-06:00,Misc,Health,Red Wing MN,Walgreens,,,,,23.61,Amex contact *2008,
+2021-12-04T14:21:00-06:00,Misc,Groceries,Hastings MN,Walmart,,,,,18.48,Cash,
+2021-12-04T13:47:00-06:00,Misc,Groceries,Hastings MN,Coborns,,,,,70.64,Amex contact *2008,
+12-05-05T08:17:00-06:00,Personal,Misc,Denver CO,National Car Rental,,,,Rental,9.35,Amex pre-auth *2008,Tolls for Denver trip
+2021-12-05T11:05:00-06:00,Misc,Groceries ,Red Wing MN,Walmart,,,,,3.76,Cash,
