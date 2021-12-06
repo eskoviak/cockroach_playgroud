@@ -1,4 +1,4 @@
 Date,Category,SubCategory,Location,Vendor,Mileage,Gallons,Balance_on_account,Vehicle,Amount,Tender,Memo
 2021-11-19T19:00:00Z,Business,Services,Online,Apple,,,,,31.18,Amex apple pay *2008,Apple One
 2021-11-22T19:00:00Z,Personal,Entertainment,"Colorado Springs, CO",Garden of the Gods,,,,,47,USB inserted *2301,Travel
-2021-11-22T19:00:00Z,Vehicle,Fuel,"Colorado Springs, CO",Kum & Go,,,,Rental,40.91,Amex Insert *2008,Travel
+2021-11-22T19:00:00Z,Car,Fuel,"Colorado Springs, CO",Kum & Go,,,,Rental,40.91,Amex Insert *2008,Travel

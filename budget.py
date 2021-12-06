@@ -1,9 +1,9 @@
-from ast import Pass
-from collections import namedtuple
+#from ast import Pass
+#from collections import namedtuple
 import json
 import csv
 import os
-from unicodedata import category
+#from unicodedata import category
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import session, sessionmaker
 from sqlalchemy_cockroachdb import run_transaction
@@ -101,7 +101,7 @@ class Budget:
         Returns:
             a list of dictionary objects to be inserted
         """
-        with open(filename, newline='') as csvfile:
+        with open(filename, newline='', encoding='utf8') as csvfile:
             reader = csv.DictReader(csvfile)
             expenses = []
             for row in reader:

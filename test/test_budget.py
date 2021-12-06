@@ -20,7 +20,11 @@ class TestAuxFunctions(unittest.TestCase):
 
     def test_bulk_load_csv_valid(self):
         data = self.budget.bulk_load_csv('data/test/test-Budget Input_valid.csv')
-        self.assertEquals(None, self.budget.validate_input(data))
+        self.assertEquals([], self.budget.validate_input(data))
+
+    def test_bult_load_csv_bad_cat(self):
+        data = self.budget.bulk_load_csv('data/test/test-Budget Input_bad_cat.csv')
+        self.assertEquals('expense_category Car not found', self.budget.validate_input(data)[0])
 
     #def test_get_expense_categories(self):
     #    self.budget.get_expense_categories = MagicMock(return_value = {"Vehicle": 123456789})
