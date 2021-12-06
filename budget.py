@@ -26,15 +26,17 @@ class Budget:
             JOIN Expense_category AS ec ON ec.id = expense_category_id
             WHERE ec.expense_category = :category;
             """)
-        if os.name == 'posix':
-            self._cert_location = os.environ['CERT_HOME_POSIX']
 
-    def _check_data(self, s : session, data : [dict()]) -> list:
+    def _check_data(self, s : session, data : list) -> list:
         """checks the expense categoroy/expense sub categories in the input
+
+        Each expense_categoy must exist in the Expense_Category object AND
+        Each expense_sub_category must exist in the Expense_Sub_Category object AND
+        The expense_sub_category must be *allowed* in the Expense_xref object
 
         Args:
             s ( sesssion ): a session
-            input ([<dict>]]): An interable of dictionarey objects
+            input (list): An interable of dictionarey objects
 
         Returns:
             a list of all the errors found
@@ -58,7 +60,7 @@ class Budget:
                     if result_xref == None:
                         data_errors.append(f"{record['expense_sub_category']} is not an allowed sub-category of {record['expense_category']}")
                         continue
-        return
+        return data_errors
 
 
     def _get_session(self) -> sessionmaker:
@@ -67,7 +69,7 @@ class Budget:
         Opens the cockroach instance based on the URL and returns the sessionmaker object which can be used by other routines.
         """
         #psycopg_uri = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/home/eskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
-        psycopg_uri = f"cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={self._cert_location}/ca.crt&options=--cluster%3Dgolden-dingo-2123"
+        psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
         return sessionmaker(bind=create_engine(psycopg_uri))
 
     def _insert_expense(self, s: session, details : dict):
@@ -113,12 +115,12 @@ class Budget:
                 detail['balance on account'] = row['Balance_on_account']
 
                 expense = dict()
-                expense['expense_category'] = row['Category']
-                expense['expense_sub_category'] = row['SubCategory']
+                expense['expense_category'] = row['Category'].strip()
+                expense['expense_sub_category'] = row['SubCategory'].strip()
                 expense['expense_detail'] = json.dumps(detail)
                 expense['date'] = row['Date']
                 expense['amount'] = row['Amount']
-                expense['tender'] = row['Tender']
+                expense['tender'] = row['Tender'].upper()
                 expense['memo'] = row['Memo']
 
                 expenses.append(expense)
@@ -154,10 +156,10 @@ class Budget:
             details (dict): the data loaded
         """
 
-        result = run_transaction(self._get_session(),
-            lambda s : self._check_data(s, details))
+        return(run_transaction(self._get_session(),
+            lambda s : self._check_data(s, details)))
 
-        print(result)
+        
 
     def add_expense(self, details: dict() ):
         """public wrapper for the interal insert function
@@ -166,8 +168,11 @@ class Budget:
             details (dict): [the dictionary containing the expense line items]
         """
 
-        run_transaction(self._get_session(), 
-            lambda s : self._insert_expense(s, details))
+        if len(self.validate_input(details)) != 0:
+            print("data is invalid")
+        else:
+            run_transaction(self._get_session(), 
+                lambda s : self._insert_expense(s, details))
 
     def get_expense_categories(self) -> dict():
         """returns a dict object of expense categories

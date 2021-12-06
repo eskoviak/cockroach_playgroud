@@ -1,8 +1,0 @@
-Date,Category,SubCategory,Location,Vendor,Mileage,Gallons,Balance_on_account,Vehicle,Amount,Tender,Memo
-2021-12-03T15:07:00-06:00,Business,Services,Red Wing MN,USPS,,,,,27.10,Cash,Express mail
-2021-12-03T13:39:00-06:00,Misc,Groceries,Red Wing MN,Walmart,,,,,48.05,Visa inserted *6624,
-2021-12-04T16:06:00-06:00,Misc,Health,Red Wing MN,Walgreens,,,,,23.61,Amex contact *2008,
-2021-12-04T14:21:00-06:00,Misc,Groceries,Hastings MN,Walmart,,,,,18.48,Cash,
-2021-12-04T13:47:00-06:00,Misc,Groceries,Hastings MN,Coborns,,,,,70.64,Amex contact *2008,
-12-05-05T08:17:00-06:00,Personal,Misc,Denver CO,National Car Rental,,,,Rental,9.35,Amex pre-auth *2008,Tolls for Denver trip
-2021-12-05T11:05:00-06:00,Misc,Groceries ,Red Wing MN,Walmart,,,,,3.76,Cash,

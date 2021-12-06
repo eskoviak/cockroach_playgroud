@@ -13,5 +13,6 @@ budget = Budget()
 #print(budget.get_chart_of_accounts())
 ##print(json.dumps(budget.get_chart_of_accounts()))
 
+#print(budget.validate_input(budget.bulk_load_csv('data/test/test-Budget Input_valid.csv')))
 #print(budget.validate_input(budget.bulk_load_csv('data/Budget Input.csv')))
 budget.add_expense(budget.bulk_load_csv('data/Budget Input.csv'))

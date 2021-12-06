@@ -22,3 +22,6 @@
 **/*.pyc
 
 **/__pycache__
+
+**/data/archive
+**/data/*.csv
