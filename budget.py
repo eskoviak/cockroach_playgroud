@@ -3,6 +3,8 @@
 import json
 import csv
 import os
+from smart_open import open
+
 #from unicodedata import category
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import session, sessionmaker
@@ -92,14 +94,53 @@ class Budget:
             )
         s.add_all(new_expense)    
 
+    def bulk_load_s3(self, filename : str) -> list:
+        """loads the csv file from S3 using environmental variables
+
+        :param filename: The filename of the remote file.  Note that pathing off of the bucket must be included
+        :type filename: str
+        :return: a list of dict objects representing the csv fields
+        :rtype: list
+
+        """
+        urn = f"{os.environ['DATA_SET_BUCKET']}/{filename}"
+        s3_uri = f"s3://{os.environ['AWS_ACCESS_KEY_ID']}:{os.environ['AWS_SECRET_ACCESS_KEY']}@{urn}"
+
+        with open(s3_uri) as s3file:
+            reader = csv.DictReader(s3file)
+            expenses = []
+            for row in reader:
+                """"The detail is stored as a stringified JSON object"""
+                detail = dict()
+                detail["location"] = row["Location"]
+                detail["vendor"] = row['Vendor']
+                detail['mileage'] = row['Mileage']
+                detail['gallons'] = row['Gallons']
+                detail['vehicle'] = row['Vehicle']
+                detail['balance on account'] = row['Balance_on_account']
+
+                expense = dict()
+                expense['expense_category'] = row['Category'].strip()
+                expense['expense_sub_category'] = row['SubCategory'].strip()
+                expense['expense_detail'] = json.dumps(detail)
+                expense['date'] = row['Date']
+                expense['amount'] = row['Amount']
+                expense['tender'] = row['Tender'].upper()
+                expense['memo'] = row['Memo']
+
+                expenses.append(expense)
+        return expenses
+
+    
+
     def bulk_load_csv(self, filename : str):
-        """Loads a csv file for expense input
+        """Loads a csv file from the local file system for expense input
 
-        Args:
-            self (object): reference to the instanciating object
+        :param filename: The filename of the local file
+        :type filename: str
+        :return: a list of dict objects representing the csv fields
+        :rtype: list
 
-        Returns:
-            a list of dictionary objects to be inserted
         """
         with open(filename, newline='', encoding='utf8') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -128,16 +169,12 @@ class Budget:
 
 
     def bulk_load_json(self, filename : str) -> dict():
-        """loads the filename and returns a dict object with entries for each receipt
+        """loads a JSON File from the local file sytemm for expense input
 
-        Args:
-            filename (str): [JSON file with receipt data]
-
-        Raises:
-            FileNotFoundError: [returned if the input file cannot be found.]
-
-        Returns:
-            [dict]: [a dictionary object with the expense line items.]
+        :param filename: The filename of the remote file.  Note that pathing off of the bucket must be included
+        :type filename: str
+        :return: a list of dict objects representing the csv fields
+        :rtype: list
         """
         assert filename.__len__() > 0, 'filename not specified'
         try:
@@ -148,12 +185,13 @@ class Budget:
             raise  FileNotFoundError
 
     def validate_input(self, details: dict() ):
-        """validates the data
+        """validates the data in the input--ensures the expense category and the sub categories exist and are allowwed
 
-        Ensures the expense category and the sub categories exist and are allowwed
+        :param details: the input dictionary
+        :type details: dict
+        :return: list of errors (empty if none found)
+        :rtype: list
 
-        Args:
-            details (dict): the data loaded
         """
 
         return(run_transaction(self._get_session(),
