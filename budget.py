@@ -4,7 +4,7 @@ import json
 import csv
 import os
 from smart_open import open
-
+import pandas as pd
 #from unicodedata import category
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import session, sessionmaker
@@ -32,20 +32,24 @@ class Budget:
     def _check_data(self, s : session, data : list) -> list:
         """checks the expense categoroy/expense sub categories in the input
 
+        :param data: the input list to be checked
+        :type data: dict
+        :return: a list of errors, empty is none
+        :rtype: list
+
+        Validation rules:
         Each expense_categoy must exist in the Expense_Category object AND
         Each expense_sub_category must exist in the Expense_Sub_Category object AND
         The expense_sub_category must be *allowed* in the Expense_xref object
-
-        Args:
-            s ( sesssion ): a session
-            input (list): An interable of dictionarey objects
-
-        Returns:
-            a list of all the errors found
         """
 
         data_errors = []
         for record in data:
+            try:
+                test = pd.to_datetime(record['date'], utc=True)
+            except BaseException as err:
+                data_errors.append(f"{err}")
+                continue
             result_category = s.query(Expense_category).filter(Expense_category.expense_category == record['expense_category'].strip()).first()
             if result_category == None:
                 data_errors.append(f"expense_category {record['expense_category']} not found")
@@ -84,7 +88,7 @@ class Budget:
             expense_sub_category = s.query(Expense_sub_category).filter(Expense_sub_category.expense_sub_category == detail['expense_sub_category'].strip()).first()
 
             new_expense.append(Expense(
-                date = detail['date'],
+                date = pd.to_datetime(detail['date'], utc=True),
                 expense_category_id = expense_category.id,
                 expense_sub_category_id = expense_sub_category.id,
                 amount = detail['amount'],
@@ -206,8 +210,8 @@ class Budget:
             details (dict): [the dictionary containing the expense line items]
         """
 
-        if len(self.validate_input(details)) != 0:
-            print("data is invalid")
+        if len(test := self.validate_input(details)) != 0:
+            print(f"data is invalid {test}")
         else:
             run_transaction(self._get_session(), 
                 lambda s : self._insert_expense(s, details))
@@ -239,7 +243,10 @@ class Budget:
         
         return expense_sub_categories
 
-    def get_chart_of_accounts(self) -> dict():
+    def get_chart_of_accounts(self) -> dict:
+        """gets the Chart Of Accounts
+
+        """
         coa = {}
         sub_categories = []
         for category in self.get_expense_categories().keys():
