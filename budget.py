@@ -3,6 +3,7 @@
 import json
 import csv
 import os
+import datetime
 from smart_open import open
 import pandas as pd
 #from unicodedata import category
@@ -96,7 +97,17 @@ class Budget:
                 expense_detail = detail['expense_detail'],
                 memo = detail['memo'])
             )
-        s.add_all(new_expense)    
+        s.add_all(new_expense)
+
+    def _archive_s3(self, filename : str) -> bool:
+        """creates a copy of filename in ../Archive with timestamp
+
+        :param filename: The filename to archive
+        :type filename: str
+        :return: True if achive successful, False if not
+        :rtype: bool
+        """
+        
 
     def bulk_load_s3(self, filename : str) -> list:
         """loads the csv file from S3 using environmental variables
