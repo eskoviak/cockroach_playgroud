@@ -11,7 +11,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import session, sessionmaker
 from sqlalchemy_cockroachdb import run_transaction
 from models import Expense, Expense_category, Expense_sub_category, Expense_xref
-
+import boto3
 
 class Budget:
     """Budget class represents the budge operations with the datastore
@@ -89,7 +89,7 @@ class Budget:
             expense_sub_category = s.query(Expense_sub_category).filter(Expense_sub_category.expense_sub_category == detail['expense_sub_category'].strip()).first()
 
             new_expense.append(Expense(
-                date = pd.to_datetime(detail['date'], utc=True),
+                date = detail['date'],
                 expense_category_id = expense_category.id,
                 expense_sub_category_id = expense_sub_category.id,
                 amount = detail['amount'],
@@ -97,7 +97,7 @@ class Budget:
                 expense_detail = detail['expense_detail'],
                 memo = detail['memo'])
             )
-        s.add_all(new_expense)
+        return(s.add_all(new_expense))
 
     def _archive_s3(self, filename : str) -> bool:
         """creates a copy of filename in ../Archive with timestamp
@@ -107,6 +107,21 @@ class Budget:
         :return: True if achive successful, False if not
         :rtype: bool
         """
+        bucket_name = os.environ['DATA_SET_BUCKET']
+        key = f"Data Sets/{filename}"
+        fn_parts = os.path.basename(key).split('.')
+        date_stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
+        archive_key = f"Data Sets/Archive/{fn_parts[0]}_{date_stamp}.{fn_parts[1]}"
+        s3 = boto3.client('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+            aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
+
+        response = s3.copy_object(
+            Bucket = bucket_name,
+            CopySource = f"{bucket_name}/{key}",
+            Key = archive_key,
+        )
+        return(True if response['ResponseMetadata']['HTTPStatusCode']==200 else False)
+        
         
 
     def bulk_load_s3(self, filename : str) -> list:
