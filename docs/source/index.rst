@@ -9,6 +9,7 @@ Welcome to Buget documentation!
    :caption: Contents:
 
    sections/chart_of_accounts
+   sections/budget
 
 
 Indices and tables
