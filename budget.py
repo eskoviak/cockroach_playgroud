@@ -140,7 +140,7 @@ class Budget:
             reader = csv.DictReader(s3file)
             expenses = []
             for row in reader:
-                """"The detail is stored as a stringified JSON object"""
+                ## The detail is stored as a stringified JSON object
                 detail = dict()
                 detail["location"] = row["Location"]
                 detail["vendor"] = row['Vendor']
@@ -222,8 +222,11 @@ class Budget:
         :return: list of errors (empty if none found)
         :rtype: list
 
+        Validation rules:
+        Each expense_categoy must exist in the Expense_Category object AND
+        Each expense_sub_category must exist in the Expense_Sub_Category object AND
+        The expense_sub_category must be *allowed* in the Expense_xref object
         """
-
         return(run_transaction(self._get_session(),
             lambda s : self._check_data(s, details)))
 
@@ -232,8 +235,9 @@ class Budget:
     def add_expense(self, details: dict() ):
         """public wrapper for the interal insert function
 
-        Args:
-            details (dict): [the dictionary containing the expense line items]
+        :param details: Dictionary containing the expenses to be added
+        :type details: dict
+        :return: 
         """
 
         if len(test := self.validate_input(details)) != 0:
