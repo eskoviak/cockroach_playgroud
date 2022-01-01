@@ -260,27 +260,41 @@ class Budget:
 
         return expense_categories
 
-    def get_sub_categories(self, c : str) -> dict():
+    def get_sub_categories(self, category : str) -> dict():
         """Returns the list of expense_sub_categories for a given category
+
+        :param category: expense category
+        :type category: str
+        :return: dictionary of expense
+        :rtype: dict
         
         """
         result =  run_transaction(self._get_session(), 
-            lambda s : s.execute(self._get_allowed_sub_category_stmt.bindparams(category=c)))
+            lambda s : s.execute(self._get_allowed_sub_category_stmt.bindparams(category=category)))
 
         expense_sub_categories = {}
-        for t in result.all():
-            expense_sub_categories[t[0]]=t[1]
+        for row in result.all():
+            expense_sub_categories[row[0]]=row[1]
         
         return expense_sub_categories
 
     def get_chart_of_accounts(self) -> dict:
         """gets the Chart Of Accounts
 
+        :return: the chart of accounts
+        :rtype: dict
+
+        The return dictionary has the following structure:
+
+        { <category> : [sub_category, ...]}
+
         """
         coa = {}
         sub_categories = []
         for category in self.get_expense_categories().keys():
-            sub_categories in self.get_sub_categories(category)
-            coa[category] = { "sub-categories" : sub_categories.__str__}
+            sub_categories.clear()
+            for sub_category in self.get_sub_categories(category).keys():
+                sub_categories.append(sub_category)
+            coa[category] = sub_categories
 
         return coa

@@ -16,6 +16,9 @@ budget = Budget()
 #print(budget.get_chart_of_accounts())
 ##print(json.dumps(budget.get_chart_of_accounts()))
 
-print(budget.validate_input(budget.bulk_load_csv('data/test/test-Budget Input_bad_cat.csv')))
+#print(budget.validate_input(budget.bulk_load_csv('data/test/test-Budget Input_bad_cat.csv')))
 #print(budget.validate_input(budget.bulk_load_csv('data/Budget Input.csv')))
 #budget.add_expense(budget.bulk_load_csv('data/Budget Input.csv'))
+
+#print(budget.get_sub_categories('Vehicle'))
+print(budget.get_chart_of_accounts())
