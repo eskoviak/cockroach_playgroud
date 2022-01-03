@@ -4,11 +4,12 @@ import json
 import csv
 import os
 import datetime
+from copy import deepcopy
 from smart_open import open
 import pandas as pd
 #from unicodedata import category
 from sqlalchemy import create_engine, text
-from sqlalchemy.orm import session, sessionmaker
+from sqlalchemy.orm import session, sessionmaker, Session
 from sqlalchemy_cockroachdb import run_transaction
 from models import Expense, Expense_category, Expense_sub_category, Expense_xref
 import boto3
@@ -29,6 +30,7 @@ class Budget:
             JOIN Expense_category AS ec ON ec.id = expense_category_id
             WHERE ec.expense_category = :category;
             """)
+        self._psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
 
     def _check_data(self, s : session, data : list) -> list:
         """checks the expense categoroy/expense sub categories in the input
@@ -69,15 +71,17 @@ class Budget:
                         continue
         return data_errors
 
-
     def _get_session(self) -> sessionmaker:
         """Gets a sessionmaker object
+
+        :return: a session
+        :rtype: sessionmaker
         
         Opens the cockroach instance based on the URL and returns the sessionmaker object which can be used by other routines.
         """
         #psycopg_uri = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/home/eskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
-        psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
-        return sessionmaker(bind=create_engine(psycopg_uri))
+        #psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
+        return sessionmaker(bind=create_engine(self._psycopg_uri))
 
     def _insert_expense(self, s: session, details : dict):
         """Internal function to insert into the expense table
@@ -122,8 +126,6 @@ class Budget:
         )
         return(True if response['ResponseMetadata']['HTTPStatusCode']==200 else False)
         
-        
-
     def bulk_load_s3(self, filename : str) -> list:
         """loads the csv file from S3 using environmental variables
 
@@ -161,8 +163,6 @@ class Budget:
                 expenses.append(expense)
         return expenses
 
-    
-
     def bulk_load_csv(self, filename : str):
         """Loads a csv file from the local file system for expense input
 
@@ -197,7 +197,6 @@ class Budget:
                 expenses.append(expense)
         return expenses
 
-
     def bulk_load_json(self, filename : str) -> dict():
         """loads a JSON File from the local file sytemm for expense input
 
@@ -229,8 +228,6 @@ class Budget:
         """
         return(run_transaction(self._get_session(),
             lambda s : self._check_data(s, details)))
-
-        
 
     def add_expense(self, details: dict() ):
         """public wrapper for the interal insert function
@@ -292,9 +289,22 @@ class Budget:
         coa = {}
         sub_categories = []
         for category in self.get_expense_categories().keys():
+            #print(category)
             sub_categories.clear()
             for sub_category in self.get_sub_categories(category).keys():
                 sub_categories.append(sub_category)
-            coa[category] = sub_categories
+            coa[category] = deepcopy(sub_categories)
 
         return coa
+
+    def backup_database(self):
+        """performs a full backup of the database to s3
+        
+        """
+        stmt = f"BACKUP budget TO 's3://{os.environ['DATA_SET_BUCKET']}/Cockroach Data/budget_backups?aws_access_key_id={os.environ['AWS_ACCESS_KEY_ID']}&aws_secret_access_key={os.environ['AWS_SECRET_ACCESS_KEY']}' AS OF SYSTEM TIME '-10s';"
+        engine = create_engine(self._psycopg_uri)
+        result = engine.execute(stmt)
+
+
+        print(result)
+        

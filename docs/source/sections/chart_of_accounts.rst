@@ -11,7 +11,7 @@ Misc                Grocery -
                     Home -                      
                     Houseware -                  
                     Recreation -              
-                    Storage                    
+                    Storage                   
 Personal            Apparel -                
                     Health -                  
                     Entertainment -              
@@ -21,11 +21,15 @@ Vehicle             Fuel -
                     Oil Change -
                     Car Wash -
                     Accessories -
-                    Maintenance
+                    Maintenance -
+                    Tolls -
+                    Insurance
 Business            Services
 Utility             Phone -
                     City Svcs -
-                    Elect -
-                    Internet
+                    Electric -
+                    Internet -
+Liability           Credit Payment -
+                    Rent
 ==================  ============================
 

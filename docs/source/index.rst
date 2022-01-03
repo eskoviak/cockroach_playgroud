@@ -10,6 +10,7 @@ Welcome to Buget documentation!
 
    sections/chart_of_accounts
    sections/budget
+   sections/models
 
 
 Indices and tables

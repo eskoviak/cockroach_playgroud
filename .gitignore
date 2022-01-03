@@ -27,3 +27,5 @@
 **/data/*.csv
 
 **/docs/build
+
+**/backup.sql

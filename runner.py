@@ -22,3 +22,5 @@ budget = Budget()
 
 #print(budget.get_sub_categories('Vehicle'))
 print(budget.get_chart_of_accounts())
+
+#print(budget.backup_database())
