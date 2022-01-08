@@ -28,8 +28,9 @@ Business            Services
 Utility             Phone -
                     City Svcs -
                     Electric -
-                    Internet -
+                    Internet
 Liability           Credit Payment -
                     Rent
+Asset               Prepayment
 ==================  ============================
 
