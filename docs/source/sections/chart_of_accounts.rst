@@ -32,5 +32,8 @@ Utility             Phone -
 Liability           Credit Payment -
                     Rent
 Asset               Prepayment
+Medical             Vision -
+                    Dental -
+                    Care
 ==================  ============================
 
