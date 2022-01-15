@@ -93,6 +93,7 @@ class Budget:
             expense_sub_category = s.query(Expense_sub_category).filter(Expense_sub_category.expense_sub_category == detail['expense_sub_category'].strip()).first()
 
             new_expense.append(Expense(
+                #date = pd.to_datetime(detail['date'], utc=True),
                 date = detail['date'],
                 expense_category_id = expense_category.id,
                 expense_sub_category_id = expense_sub_category.id,
