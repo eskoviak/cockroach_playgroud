@@ -16,7 +16,8 @@ Personal            Apparel -
                     Health -                  
                     Entertainment -              
                     Donation -
-                    Electronics
+                    Electronics -
+                    Subscription
 Vehicle             Fuel -
                     Oil Change -
                     Car Wash -
