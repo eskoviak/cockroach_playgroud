@@ -5,7 +5,6 @@ import csv
 import os
 import datetime
 from copy import deepcopy
-from smart_open import open
 import pandas as pd
 #from unicodedata import category
 from sqlalchemy import create_engine, text
@@ -13,6 +12,7 @@ from sqlalchemy.orm import session, sessionmaker, Session
 from sqlalchemy_cockroachdb import run_transaction
 from models import Expense, Expense_category, Expense_sub_category, Expense_xref
 import boto3
+from dotenv import dotenv_values
 
 class Budget:
     """Budget class represents the budge operations with the datastore
@@ -30,7 +30,9 @@ class Budget:
             JOIN Expense_category AS ec ON ec.id = expense_category_id
             WHERE ec.expense_category = :category;
             """)
-        self._psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
+        self.config = dotenv_values('.env')
+        #self._psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
+        self._psycopg_uri = f"cockroachdb://{self.config['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={self.config['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
 
     def _check_data(self, s : session, data : list) -> list:
         """checks the expense categoroy/expense sub categories in the input
@@ -112,13 +114,13 @@ class Budget:
         :return: True if achive successful, False if not
         :rtype: bool
         """
-        bucket_name = os.environ['DATA_SET_BUCKET']
+        bucket_name = self.config['S3_BUCKET']
         key = f"Data Sets/{filename}"
         fn_parts = os.path.basename(key).split('.')
         date_stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
         archive_key = f"Data Sets/Archive/{fn_parts[0]}_{date_stamp}.{fn_parts[1]}"
-        s3 = boto3.client('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-            aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
+        s3 = boto3.client('s3', aws_access_key_id=self.config['AWS_ACCESS_KEY_ID'],
+            aws_secret_access_key=self.config['AWS_SECRET_ACCESS_KEY'])
 
         response = s3.copy_object(
             Bucket = bucket_name,
@@ -136,8 +138,8 @@ class Budget:
         :rtype: list
 
         """
-        urn = f"{os.environ['DATA_SET_BUCKET']}/{filename}"
-        s3_uri = f"s3://{os.environ['AWS_ACCESS_KEY_ID']}:{os.environ['AWS_SECRET_ACCESS_KEY']}@{urn}"
+        urn = f"{self.config['S3_BUCKET']}/{filename}"
+        s3_uri = f"s3://{self.config['AWS_ACCESS_KEY_ID']}:{self.config['AWS_SECRET_ACCESS_KEY']}@{urn}"
 
         with open(s3_uri) as s3file:
             reader = csv.DictReader(s3file)
@@ -296,13 +298,13 @@ class Budget:
                 sub_categories.append(sub_category)
             coa[category] = deepcopy(sub_categories)
 
-        return coa
+        return json.dumps(coa)
 
     def backup_database(self):
         """performs a full backup of the database to s3
         
         """
-        stmt = f"BACKUP budget TO 's3://{os.environ['DATA_SET_BUCKET']}/Cockroach Data/budget_backups?aws_access_key_id={os.environ['AWS_ACCESS_KEY_ID']}&aws_secret_access_key={os.environ['AWS_SECRET_ACCESS_KEY']}' AS OF SYSTEM TIME '-10s';"
+        stmt = f"BACKUP DATABASE budget TO 's3://{self.config['S3_BUCKET']}/Cockroach Data/budget_backups?aws_access_key_id={self.config['AWS_ACCESS_KEY_ID']}&aws_secret_access_key={self.config['AWS_SECRET_ACCESS_KEY']}' AS OF SYSTEM TIME '-10s';"
         engine = create_engine(self._psycopg_uri)
         result = engine.execute(stmt)
 

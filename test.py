@@ -1,8 +1,10 @@
 """test.py
 
 """
+import sys
+sys.path.append('../s3utils')
 from budget import Budget
-from ..s3utils.s3_object import S3_object
+from s3_object import S3_object
 from dotenv import dotenv_values
 
 s3_object = S3_object()

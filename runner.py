@@ -21,6 +21,6 @@ budget = Budget()
 #budget.add_expense(budget.bulk_load_csv('data/Budget Input.csv'))
 
 #print(budget.get_sub_categories('Vehicle'))
-print(budget.get_chart_of_accounts())
+#print(budget.get_chart_of_accounts())
 
-#print(budget.backup_database())
+print(budget.backup_database())
