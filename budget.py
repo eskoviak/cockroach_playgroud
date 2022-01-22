@@ -1,5 +1,7 @@
-#from ast import Pass
-#from collections import namedtuple
+"""Module Budget
+
+Data Access Object to budget database
+"""
 import json
 import csv
 import os
@@ -15,12 +17,11 @@ import boto3
 from dotenv import dotenv_values
 
 class Budget:
-    """Budget class represents the budge operations with the datastore
+    """Budget class represents the budget operations with the datastore
 
     """
 
-    #_data_check = namedtuple('_data_check', [ 'Field', 'Error'])
-    _cert_location : str = ''
+    #_cert_location : str = ''
 
     def __init__(self):
         self._get_allowed_sub_category_stmt = text("""
@@ -31,6 +32,7 @@ class Budget:
             WHERE ec.expense_category = :category;
             """)
         self.config = dotenv_values('.env')
+        self.config['OSTYPE'] = os.environ['OSTYPE']
         #self._psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
         self._psycopg_uri = f"cockroachdb://{self.config['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={self.config['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
 
