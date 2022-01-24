@@ -15,6 +15,7 @@ from sqlalchemy_cockroachdb import run_transaction
 from models import Expense, Expense_category, Expense_sub_category, Expense_xref
 import boto3
 from dotenv import dotenv_values
+from smart_open import open
 
 class Budget:
     """Budget class represents the budget operations with the datastore
@@ -32,7 +33,7 @@ class Budget:
             WHERE ec.expense_category = :category;
             """)
         self.config = dotenv_values('.env')
-        self.config['OSTYPE'] = os.environ['OSTYPE']
+        #self.config['OSTYPE'] = os.environ['OSTYPE']
         #self._psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
         self._psycopg_uri = f"cockroachdb://{self.config['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={self.config['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
 

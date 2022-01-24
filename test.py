@@ -19,4 +19,5 @@ print(budget.add_expense((budget.bulk_load_s3('Data Sets/Budget Input.csv'))))
 
 print(budget._archive_s3('Budget Input.csv'))
 
-
+##s3://elasticbeanstalk-us-west-2-502865036487/Data Sets/Budget Input.csv
+#https://elasticbeanstalk-us-west-2-502865036487.s3.us-west-2.amazonaws.com/Data+Sets/Budget+Input.csv
