@@ -33,9 +33,11 @@ Utility             Phone -
                     Internet
 Liability           Credit Payment -
                     Rent
-Asset               Prepayment
+Asset               Prepayment -
+                    Deposit
 Medical             Vision -
                     Dental -
                     Care
+Withdrawing         Cash
 ==================  ============================
 
