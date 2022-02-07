@@ -26,7 +26,9 @@ Vehicle             Fuel -
                     Maintenance -
                     Tolls -
                     Insurance
-Business            Services
+Business            Services -
+                    Office Furniture -
+                    Supplies
 Utility             Phone -
                     City Svcs -
                     Electric -
