@@ -28,7 +28,8 @@ Vehicle             Fuel -
                     Insurance
 Business            Services -
                     Office Furniture -
-                    Supplies
+                    Supplies -
+                    Fee
 Utility             Phone -
                     City Svcs -
                     Electric -
