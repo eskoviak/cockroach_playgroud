@@ -35,6 +35,7 @@ Utility             Phone -
                     Electric -
                     Internet
 Liability           Credit Payment -
+                    Loan Paymment
                     Rent
 Asset               Prepayment -
                     Deposit

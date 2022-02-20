@@ -10,7 +10,7 @@ from copy import deepcopy
 import pandas as pd
 #from unicodedata import category
 from sqlalchemy import create_engine, text
-from sqlalchemy.orm import session, sessionmaker, Session
+from sqlalchemy.orm import session, sessionmaker
 from sqlalchemy_cockroachdb import run_transaction
 from models import Expense, Expense_category, Expense_sub_category, Expense_xref
 import boto3
@@ -122,10 +122,10 @@ class Budget:
         fn_parts = os.path.basename(key).split('.')
         date_stamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
         archive_key = f"Data Sets/Archive/{fn_parts[0]}_{date_stamp}.{fn_parts[1]}"
-        s3 = boto3.client('s3', aws_access_key_id=self.config['AWS_ACCESS_KEY_ID'],
+        _s3_client = boto3.client('s3', aws_access_key_id=self.config['AWS_ACCESS_KEY_ID'],
             aws_secret_access_key=self.config['AWS_SECRET_ACCESS_KEY'])
 
-        response = s3.copy_object(
+        response = _s3_client.copy_object(
             Bucket = bucket_name,
             CopySource = f"{bucket_name}/{key}",
             Key = archive_key,
