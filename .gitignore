@@ -22,3 +22,12 @@
 **/*.pyc
 
 **/__pycache__
+
+**/data/archive
+**/data/*.csv
+
+**/docs/build
+
+**/backup.sql
+
+**/.env
