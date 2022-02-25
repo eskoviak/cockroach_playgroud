@@ -12,11 +12,10 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import session, sessionmaker
 from sqlalchemy_cockroachdb import run_transaction
-from models import Expense, Expense_category, Expense_sub_category, Expense_xref
 import boto3
 from dotenv import dotenv_values
 from smart_open import open
-
+from models import Expense, Expense_category, Expense_sub_category, Expense_xref
 class Budget:
     """Budget class represents the budget operations with the datastore
 
@@ -33,8 +32,6 @@ class Budget:
             WHERE ec.expense_category = :category;
             """)
         self.config = dotenv_values('.env')
-        #self.config['OSTYPE'] = os.environ['OSTYPE']
-        #self._psycopg_uri = f"cockroachdb://{os.environ['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={os.environ['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
         self._psycopg_uri = f"cockroachdb://{self.config['COCKROACH_ID']}@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert={self.config['HOME']}/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123"
 
     def _check_data(self, s : session, data : list) -> list:
@@ -182,7 +179,8 @@ class Budget:
             reader = csv.DictReader(csvfile)
             expenses = []
             for row in reader:
-                """"The detail is stored as a stringified JSON object"""
+                """The detail is stored as a stringified JSON object
+                """
                 detail = dict()
                 detail["location"] = row["Location"]
                 detail["vendor"] = row['Vendor']
