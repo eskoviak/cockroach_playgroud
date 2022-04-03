@@ -12,20 +12,24 @@ Misc                Grocery -
                     Houseware -                  
                     Recreation -              
                     Storage                   
-Personal            Apparel -                
-                    Health -                  
-                    Entertainment -              
+Personal            Apparel -
                     Donation -
+                    Education -                 
                     Electronics -
+                    Entertainment -
+                    Gaming -
+                    Health -
+                    Sports Equipment -                                
                     Subscription -
-                    Gaming
-Vehicle             Fuel -
-                    Oil Change -
+                    Travel
+Vehicle             Accessories -
                     Car Wash -
-                    Accessories -
+                    Fuel -
+                    Insurance -
                     Maintenance -
+                    Oil Change -
                     Tolls -
-                    Insurance
+                    Registration
 Business            Services -
                     Office Furniture -
                     Supplies -
@@ -35,10 +39,14 @@ Utility             Phone -
                     Electric -
                     Internet
 Liability           Credit Payment -
-                    Loan Paymment
+                    Loan Paymment -
                     Rent
-Asset               Prepayment -
-                    Deposit
+Asset               Deposit -
+                    Fee -
+                    Inccome -
+                    Interest Income -
+                    Prepayment -
+                    Withdrawl
 Medical             Vision -
                     Dental -
                     Care
