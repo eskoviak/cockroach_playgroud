@@ -9,8 +9,8 @@ import datetime
 from copy import deepcopy
 import pandas as pd
 #from unicodedata import category
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import session, sessionmaker
+from sqlalchemy import create_engine, text, select
+from sqlalchemy.orm import session, sessionmaker, Session
 from sqlalchemy_cockroachdb import run_transaction
 import boto3
 from dotenv import dotenv_values
@@ -128,6 +128,30 @@ class Budget:
             Key = archive_key,
         )
         return(True if response['ResponseMetadata']['HTTPStatusCode']==200 else False)
+
+    def _add_expense_category(self, s : session, expense_cat : str) :
+        """Add expense category.
+
+        Caller should have checked to see if it existed
+
+        """
+        new_category = Expense_category(expense_category = str(expense_cat))
+        return(s.add(new_category))
+
+    def _add_expense_sub_category(self, s : session, expense_sub_cat : str) -> int:
+        """Add a sub-category to the expense_sub_category table, if it doesn't exist.
+        
+        :param expense_sub_cat: The sub-category to add
+        :type expense_sub_cat: str
+        :return: the id of the new sub-cateogory 
+        :rtype: int
+
+        If the expense_sub_cat exists, return the id.  Otherwise add the expense sub-category.  Since adding to xref uses ids, it
+        isn't necessary to duplicate the sub
+        """
+        result = select(Expense_sub_category).where(Expense_sub_category.expense_sub_category.in_([expense_sub_cat]))
+        for sub_cat in s.scalars(result):
+            print(sub_cat)
         
     def bulk_load_s3(self, filename : str) -> list:
         """loads the csv file from S3 using environmental variables
@@ -247,6 +271,39 @@ class Budget:
             run_transaction(self._get_session(), 
                 lambda s : self._insert_expense(s, details))
 
+    def add_expense_category(self, expense_category : str) -> int:
+        """Add expense category
+
+        :param expense_category: The category text to add
+        :type expense_category: str
+        :return: status -1 if the category exists, 1 if added, 0 if other error occurred
+        :rtype: int
+
+        Check to see if the expense category exists; if it does, return an error (-1), if not add it, check to see if it has been added.
+
+
+        """
+        if expense_category in self.get_expense_categories():
+            return -1
+        else:
+            run_transaction(self._get_session(),
+              lambda s: self._add_expense_category(s, expense_category))
+            if expense_category in self.get_expense_categories():
+                return 1
+            else:
+                return 0
+
+    def add_expense_sub_category(self, expense_sub_cat : str) -> int:
+        """return the id of the existing or newly created expense sub-category
+        
+        :param expense_sub_cat: The value to fetch or add
+        :type expense_sub_cat: str
+        :return: the id of the item (new or existing)
+        :rtype: int
+        
+        """
+        return self._add_expense_sub_category(self._get_session(), expense_sub_cat)
+
     def get_expense_categories(self) -> dict():
         """returns a dict object of expense categories
         
@@ -299,7 +356,7 @@ class Budget:
                 sub_categories.append(sub_category)
             coa[category] = deepcopy(sub_categories)
 
-        return json.dumps(coa)
+        return coa
 
     def backup_database(self):
         """performs a full backup of the database to s3

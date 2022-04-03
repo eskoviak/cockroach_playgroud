@@ -18,8 +18,8 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-	scp -r ./build/html/* eskoviak@192.168.1.10:/var/www/html/budget	
+	cp -R build/html/* /var/www/html/budget
 	
 	
+#scp -r ./build/html/* eskoviak@192.168.1.10:/var/www/html/budget	
 	
-#cp -R build/html/ /var/www/html/budget

@@ -25,7 +25,8 @@ Vehicle             Fuel -
                     Accessories -
                     Maintenance -
                     Tolls -
-                    Insurance
+                    Insurance -
+                    Registration
 Business            Services -
                     Office Furniture -
                     Supplies -
@@ -37,8 +38,11 @@ Utility             Phone -
 Liability           Credit Payment -
                     Loan Paymment
                     Rent
-Asset               Prepayment -
-                    Deposit
+Asset               Deposit -
+                    Fee - 
+                    Income -
+                    Prepayment -
+                    Withdrawl
 Medical             Vision -
                     Dental -
                     Care
