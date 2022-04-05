@@ -31,3 +31,5 @@
 **/backup.sql
 
 **/.env
+
+**/unload_tables.sql
