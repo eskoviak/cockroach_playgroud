@@ -14,7 +14,7 @@ from sqlalchemy.orm import session, sessionmaker, Session
 from sqlalchemy_cockroachdb import run_transaction
 import boto3
 from dotenv import dotenv_values
-from smart_open import open
+#from smart_open import open
 from models import Expense, Expense_category, Expense_sub_category, Expense_xref
 class Budget:
     """Budget class represents the budget operations with the datastore

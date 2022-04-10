@@ -15,6 +15,9 @@
 **/share
 **/tmp
 
+# ignore the virtual directory
+**/vpython3.10
+
 **/pyvenv.cfg
 
 **/.DS_store

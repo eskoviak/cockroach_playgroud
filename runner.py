@@ -22,9 +22,9 @@ budget = Budget()
 
 #print(budget.get_expense_categories())
 #print(budget.get_sub_categories('Asset'))
-#coa =budget.get_chart_of_accounts()
-
+coa =budget.get_chart_of_accounts()
+print(coa)
 #print('Bogus' in coa['Vehicle'])
 
 #print(budget.backup_database())
-print(budget.add_expense_sub_category('bogus'))
+#print(budget.add_expense_sub_category('bogus'))
