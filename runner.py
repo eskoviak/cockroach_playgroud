@@ -20,7 +20,11 @@ budget = Budget()
 #print(budget.validate_input(budget.bulk_load_csv('data/Budget Input.csv')))
 #budget.add_expense(budget.bulk_load_csv('data/Budget Input.csv'))
 
-#print(budget.get_sub_categories('Vehicle'))
-print(budget.get_chart_of_accounts())
+#print(budget.get_expense_categories())
+#print(budget.get_sub_categories('Asset'))
+#coa =budget.get_chart_of_accounts()
+
+#print('Bogus' in coa['Vehicle'])
 
 #print(budget.backup_database())
+print(budget.add_expense_sub_category('bogus'))

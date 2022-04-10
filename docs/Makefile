@@ -21,5 +21,5 @@ help:
 	cp -R ./build/html/* /var/www/html/budget	
 	
 	
+#scp -r ./build/html/* eskoviak@192.168.1.10:/var/www/html/budget	
 	
-#cp -R build/html/ /var/www/html/budget
