@@ -75,7 +75,7 @@ class Test(Base):
 #####
 if __name__ == '__main__':
     try:
-        psycopg_uri = url = 'cockroachdb://ed:Kh4V3R9B7DcygecH@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
+        psycopg_uri = url = 'cockroachdb://ed:UKZw18mpJDVal8A9tKJNOQ@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/budget?sslmode=verify-full&sslrootcert=/Users/edmundlskoviak/.postgresql/ca.crt&options=--cluster%3Dgolden-dingo-2123'
         engine = create_engine(psycopg_uri)
     except Exception as e:
         print('Failed to connect to database.')
